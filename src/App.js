@@ -5,6 +5,17 @@ import About from './components/About'
 import Footer from './components/Footer'
 import CreateNew from './components/CreateNew'
 
+const Anecdote = ({ anecdote }) => {
+  return (
+    <div>
+      <b>{anecdote.content}</b>
+      <p>by {anecdote.author}</p>
+      <p>votes: {anecdote.votes}</p>
+      <a href={anecdote.info}>more info</a>
+    </div>  
+  )
+}
+
 class App extends React.Component {
   constructor() {
     super()
@@ -30,13 +41,17 @@ class App extends React.Component {
     }
   }
 
-  addNew = (anecdote) => {
+  addNew = (anecdote, history) => {
+    console.log(anecdote)
+    console.log(history)
     anecdote.id = (Math.random() * 10000).toFixed(0)
     this.setState({ anecdotes: this.state.anecdotes.concat(anecdote) })
+    history.push('/')
   }
 
-  anecdoteById = (id) =>
-    this.state.anecdotes.find(a => a.id === id)
+  anecdoteById = (id) => {
+    return this.state.anecdotes.find(a => a.id === id)
+  }
 
   vote = (id) => {
     const anecdote = this.anecdoteById(id)
@@ -63,8 +78,11 @@ class App extends React.Component {
               <Link to="/about">about</Link>
             </div>
             <Route exact path="/" render={() => <AnecdoteList anecdotes={this.state.anecdotes} />} />
-            <Route path="/new" render={() => <CreateNew />} />
-            <Route path="/about" render={() => <About />} />
+            <Route exact path="/new" render={({history}) => 
+              <CreateNew history={history} addNew={this.addNew}/>} 
+            />
+            <Route exact path="/about" render={() => <About />} />
+            <Route exact path="/anecdote/:id" render={({ match }) => <Anecdote anecdote={this.anecdoteById(match.params.id)} />} />
           </div>
         </Router>
         <Footer />

@@ -16,14 +16,15 @@ class CreateNew extends React.Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-    this.props.addNew({
+  handleSubmit = (event) => {
+    event.preventDefault()
+    const newAnecdote = {
       content: this.state.content,
       author: this.state.author,
       info: this.state.info,
       votes: 0
-    })
+    }
+    this.props.addNew(newAnecdote, this.props.history)
   }
 
   render() {
