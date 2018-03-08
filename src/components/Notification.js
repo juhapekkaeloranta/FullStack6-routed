@@ -7,17 +7,17 @@ const Notification = ({ notificationText }) => {
     border: 'solid',
     borderColor: '#9bb290',
     padding: 10,
-    borderWidth: 1,
-    marginTop: 5
+    borderWidth: 0.5,
+    marginTop: 5,
+    minHeight: 25
   }
 
   const emptyStyle = {
     backgroundColor: '#ffffff',
-    border: 'solid',
-    borderColor: '#000000', //'#9bb290',
     padding: 10,
     borderWidth: 1,
-    marginTop: 5
+    marginTop: 5,
+    minHeight: 25
   }
 
   const notificationElement = () => (
@@ -28,8 +28,8 @@ const Notification = ({ notificationText }) => {
 
   const notificationPlaceholder = () => (
     <div style={emptyStyle}>
-      Hello!
-      </div>
+      
+    </div>
   )
 
   if (notification !== null) {

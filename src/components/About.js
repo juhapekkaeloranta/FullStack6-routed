@@ -11,6 +11,8 @@ const About = () => (
       An anecdote is "a story with a point."</em>
 
     <p>Software engineering is full of excellent anecdotes, at this app you can find the best and add more.</p>
+    <img alt='Software expert Martin Fowler' src='https://martinfowler.com/img/mf-cologne.jpg'></img>
+    <p>Martin Fowler</p>
   </div>
 )
 

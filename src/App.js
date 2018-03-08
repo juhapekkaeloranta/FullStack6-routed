@@ -5,16 +5,44 @@ import About from './components/About'
 import Footer from './components/Footer'
 import CreateNew from './components/CreateNew'
 import Notification from './components/Notification'
+import Paper from 'material-ui/Paper'
+import Button from 'material-ui/Button'
 
 const Anecdote = ({ anecdote }) => {
   return (
     <div>
-      <b>{anecdote.content}</b>
+      <i>{anecdote.content}</i>
       <p>by {anecdote.author}</p>
       <p>votes: {anecdote.votes}</p>
       <a href={anecdote.info}>more info</a>
     </div>
   )
+}
+
+const textStyle = {
+  fontFamily: 'Open Sans',
+  textTransform: 'none'
+}
+
+const paperStyle = {
+  height: '100%',
+  width: 400,
+  margin: '0 auto',
+  textAlign: 'center',
+  display: 'inline-block',
+  padding: 10
+}
+
+const buttonStyle = {
+  bg: '#darkblue',
+  border: 'solid',
+  borderColor: '#757575',
+  borderWidth: 1,
+  fontFamily: 'Open Sans',
+  textTransform: 'none',
+  fontSize: '1rem',
+  marginLeft: 10,
+  marginRight: 10
 }
 
 class App extends React.Component {
@@ -72,14 +100,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Software anecdotes</h1>
+      <div><Paper style={paperStyle} zDepth={3}>
+        <h1 style={textStyle}>Software anecdotes</h1>
         <Router>
           <div>
             <div>
-              <Link to="/">anecdotes</Link> &nbsp;
-              <Link to="/new">create new</Link> &nbsp;
-              <Link to="/about">about</Link>
+              <Button style={buttonStyle}><Link to="/">Anecdotes</Link> &nbsp;</Button>
+              <Button style={buttonStyle}><Link to="/new">Create new</Link> &nbsp;</Button>
+              <Button style={buttonStyle}><Link to="/about">About</Link></Button>
             </div>
             <Notification notificationText={this.state.notification} />
             <Route exact path="/" render={() => <AnecdoteList anecdotes={this.state.anecdotes} />} />
@@ -91,8 +119,9 @@ class App extends React.Component {
           </div>
         </Router>
         <Footer />
+      </Paper>
       </div>
-    );
+    )
   }
 }
 
